@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AES Breezeway Menu App</title>
+    <!-- Load Tailwind CSS for utility-first styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Lucide icons for clean, modern interface elements -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="./menu-app.css">
+</head>
+<body>
+
+    <main id="app-frame">
+        <!-- Short App Description Header -->
+        <header class="p-3 text-center text-sm bg-aes-navy text-white font-medium">
+            <p>AES Breezeway Menu: See today's special, place a takeaway order, and save your favorites.</p>
+        </header>
+
+        <!-- Dynamic Content Area -->
+        <div id="content-views" class="flex-grow relative">
+
+            <!-- 1. LANDING VIEW (Home Screen - Breezeway Menu) -->
+            <section id="landing-view" class="absolute inset-0 p-8 flex flex-col justify-between view-transition bg-aes-navy text-white">
+                <div class="text-center">
+                    <h1 class="text-4xl font-extrabold text-aes-gold mb-6">Breezeway Menu</h1>
+
+                    <!-- Food Image Placeholder / Content Area -->
+                    <div class="flex justify-center items-center my-8">
+                        <!-- NEW: Hamburger Image Placeholder (from the sketch) -->
+                        <i data-lucide="hamburger" class="w-48 h-48 text-aes-gold"></i>
+                    </div>
+
+                    <!-- UPDATED: Text is now more prominent with a subtle shadow instead of a border -->
+                    <p class="text-xl font-semibold text-white text-center mt-12 mb-6 p-2 rounded-lg 
+                              shadow-lg shadow-aes-gold/50">
+                        A menu app for AES High School students.
+                    </p>
+                </div>
+
+                <!-- Get Started Button (Gold) -->
+                <button onclick="showView('menu-view')" class="bg-aes-gold text-aes-navy font-bold py-4 rounded-xl shadow-lg hover:bg-yellow-500 transition duration-150 transform hover:scale-105">
+                    Get Started
+                </button>
+            </section>
+
+            <!-- 2. MENU VIEW (Today's Menu) -->
+            <section id="menu-view" class="absolute inset-0 p-6 flex flex-col view-transition hidden bg-content-tint">
+                <header class="mb-6">
+                    <h2 class="text-3xl font-extrabold text-aes-navy text-center">Breezeway Menu</h2>
+                </header>
+                
+                <main class="flex-grow space-y-8">
+                    <!-- Today's Menu Card -->
+                    <div class="bg-white p-4 py-6 rounded-xl shadow-lg border-2 border-aes-gold">
+                        <h3 class="text-xl font-bold text-aes-navy border-b pb-2 mb-3 text-center">TODAY'S MENU</h3>
+                        
+                        <!-- Image Container for the Generated Image -->
+                        <div id="image-container" class="flex justify-center items-center h-52 bg-gray-100 rounded-lg mb-4">
+                            <!-- Place the attached image file at ./images/todays-menu.jpg
+                                 (create an `images` folder next to this HTML file and drop the image there)
+                                 The <img> below will replace the loader and display Today's Menu. -->
+                       <!-- Image element will be created dynamically by JS. If you prefer a static file,
+                           place the image at ./images/peri peri.jpeg (or ./images/todays-menu.jpg) and
+                           the script will attempt to load it before calling the image API. -->
+                       <img id="main-dish-image" src="peri%20peri.jpeg" alt="Today's Menu - Peri-Peri Chicken drumsticks with peri sauce" loading="lazy" decoding="async" />
+                        </div>
+
+                        <!-- Menu Details -->
+                        <ul class="space-y-3 text-gray-800 font-medium pt-3">
+                            <li class="flex justify-between items-center border-b pb-1">
+                                <span><span class="text-aes-gold">•</span> Main Dish:</span> 
+                                <span class="font-bold text-aes-navy">Peri-Peri Chicken Bowl</span>
+                            </li>
+                            <li class="flex justify-between items-center border-b pb-1">
+                                <span><span class="text-aes-gold">•</span> Side:</span>
+                                <span>Sweet Potato Fries</span>
+                            </li>
+                            <li class="flex justify-between items-center border-b pb-1">
+                                <span><span class="text-aes-gold">•</span> Vegetarian Option:</span>
+                                <span>Black Bean Burger</span>
+                            </li>
+                            <li class="flex justify-between items-center border-b pb-1">
+                                <span><span class="text-aes-gold">•</span> Dessert:</span>
+                                <span>Fresh Fruit Salad</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Middle Navigation Icons -->
+                    <nav class="flex justify-around items-center pt-4">
+                        <div class="text-center cursor-pointer hover:text-aes-gold transition" onclick="showView('orders-view')">
+                            <i data-lucide="package" class="w-10 h-10 text-aes-navy mx-auto p-2 border-2 border-aes-navy rounded-xl mb-1 hover:border-aes-gold hover:text-aes-gold"></i>
+                            <span class="text-sm text-aes-navy font-semibold">Takeaway</span>
+                        </div>
+                        <div class="text-center cursor-pointer hover:text-aes-gold transition">
+                            <i data-lucide="video" class="w-10 h-10 text-aes-navy mx-auto p-2 border-2 border-aes-navy rounded-xl mb-1 hover:border-aes-gold hover:text-aes-gold"></i>
+                            <span class="text-sm text-aes-navy font-semibold">Videos</span>
+                        </div>
+                        <div class="text-center cursor-pointer hover:text-aes-gold transition">
+                            <i data-lucide="heart" class="w-10 h-10 text-aes-navy mx-auto p-2 border-2 border-aes-navy rounded-xl mb-1 hover:border-aes-gold hover:text-aes-gold"></i>
+                            <span class="text-sm text-aes-navy font-semibold">Favorites</span>
+                        </div>
+                    </nav>
+                </main>
+
+                <!-- Footer Navigation -->
+                <nav class="flex justify-around items-center border-t border-aes-navy pt-4">
+                    <i data-lucide="home" class="w-6 h-6 text-aes-gold cursor-pointer" onclick="showView('landing-view')"></i>
+                    <i data-lucide="search" class="w-6 h-6 text-gray-400 cursor-pointer"></i>
+                    <i data-lucide="align-justify" class="w-6 h-6 text-gray-400 cursor-pointer"></i>
+                </nav>
+            </section>
+
+            <!-- 3. ORDERS VIEW (Takeaway Orders / Specials) -->
+            <section id="orders-view" class="absolute inset-0 p-6 flex flex-col view-transition hidden bg-content-tint">
+                <header class="mb-6 flex justify-between items-center">
+                    <h2 class="text-3xl font-extrabold text-aes-navy text-center">Takeaway Orders</h2>
+                    <i data-lucide="x" class="w-6 h-6 text-aes-navy cursor-pointer" onclick="showView('menu-view')"></i>
+                </header>
+
+                <main class="flex-grow space-y-6">
+                    <!-- Order Forms -->
+                    <div class="space-y-4">
+                        <!-- UPDATED: Added a title to the ordering form -->
+                        <h3 class="text-xl font-bold text-aes-navy border-b pb-2">Your Order</h3>
+                        <input type="text" placeholder="Item 1: e.g., Peri-Peri Chicken Bowl" class="w-full p-3 border-b-2 border-gray-300 focus:border-aes-gold focus:outline-none rounded-md">
+                        <input type="text" placeholder="Item 2: e.g., Small Water" class="w-full p-3 border-b-2 border-gray-300 focus:border-aes-gold focus:outline-none rounded-md">
+                        <button class="w-full bg-aes-navy text-white font-semibold py-3 rounded-lg shadow-md hover:bg-gray-800 transition duration-150">
+                            Submit Order
+                        </button>
+                    </div>
+
+                    <!-- Special of the Day Card -->
+                    <div class="bg-aes-gold/20 p-4 rounded-xl shadow-lg border-2 border-aes-gold mt-8">
+                        <h3 class="text-xl font-bold text-aes-navy mb-4">SPECIAL OF THE DAY</h3>
+                        <div class="flex items-center space-x-4 bg-white p-3 rounded-lg shadow-inner cursor-pointer hover:shadow-md transition">
+                            <i data-lucide="play-circle" class="w-12 h-12 text-aes-gold"></i>
+                            <span class="text-lg text-gray-800 font-medium">Watch the recipe!</span>
+                        </div>
+                    </div>
+                </main>
+
+                <!-- Simple Footer Nav Placeholder -->
+                <nav class="text-center text-sm text-gray-500 pt-4">
+                    <i data-lucide="align-justify" class="w-6 h-6 text-gray-400 cursor-pointer"></i>
+                </nav>
+            </section>
+
+        </div>
+
+    </main>
+
+    <script defer src="./menu-app.js"></script>
+</body>
+</html>
